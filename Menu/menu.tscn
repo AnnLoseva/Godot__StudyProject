@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://c6dcrcp3dfqm1"]
+[gd_scene load_steps=3 format=3 uid="uid://c6dcrcp3dfqm1"]
 
 [ext_resource type="Script" path="res://Menu/menu.gd" id="1_so3xh"]
+[ext_resource type="PackedScene" uid="uid://cdv48eln07iqa" path="res://Art/Parallax_BackGround.tscn" id="2_bok2y"]
 
 [node name="Menu" type="Node2D"]
 script = ExtResource("1_so3xh")
@@ -20,6 +21,8 @@ offset_right = 806.0
 offset_bottom = 439.0
 theme_override_font_sizes/font_size = 50
 text = "Quit"
+
+[node name="ParallaxBackground" parent="." instance=ExtResource("2_bok2y")]
 
 [connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
