@@ -1,0 +1,68 @@
+[gd_scene load_steps=10 format=3 uid="uid://dli31gu1uc6eh"]
+
+[ext_resource type="Script" path="res://Mobs/skeleton.gd" id="1_im054"]
+[ext_resource type="Texture2D" uid="uid://bwxmckoquwb3p" path="res://Art/Monsters_Creatures_Fantasy/Skeleton/Idle.png" id="2_frqse"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_s51ni"]
+height = 34.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2bv03"]
+atlas = ExtResource("2_frqse")
+region = Rect2(0, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mrae4"]
+atlas = ExtResource("2_frqse")
+region = Rect2(150, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3es2s"]
+atlas = ExtResource("2_frqse")
+region = Rect2(300, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6p3ph"]
+atlas = ExtResource("2_frqse")
+region = Rect2(450, 0, 150, 150)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_la0hj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2bv03")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mrae4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3es2s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6p3ph")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 8.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g3ps5"]
+radius = 192.315
+
+[node name="Skeleton" type="CharacterBody2D"]
+script = ExtResource("1_im054")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_s51ni")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-1, -1)
+scale = Vector2(0.6, 0.6)
+sprite_frames = SubResource("SpriteFrames_la0hj")
+animation = &"Idle"
+autoplay = "Idle"
+
+[node name="Detector" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detector"]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_g3ps5")
+
+[connection signal="body_entered" from="Detector" to="." method="_on_detector_body_entered"]
+[connection signal="body_exited" from="Detector" to="." method="_on_detector_body_exited"]
