@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bd608yivglinw"]
+[gd_scene load_steps=8 format=3 uid="uid://bd608yivglinw"]
 
 [ext_resource type="PackedScene" uid="uid://bhb4s7m7c7i7l" path="res://Player/Player.tscn" id="1_pgey1"]
 [ext_resource type="PackedScene" uid="uid://cdv48eln07iqa" path="res://Art/Parallax_BackGround.tscn" id="2_c7mjm"]
@@ -1245,6 +1245,20 @@ texture = ExtResource("3_554g4")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_60pqw")
 
+[sub_resource type="GDScript" id="GDScript_7q3eq"]
+script/source = "extends Label
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	text = \"HP: \" + str($\"../../Player/Player\".hp)
+"
+
 [node name="Level" type="Node2D"]
 
 [node name="ParallaxBackground" parent="." instance=ExtResource("2_c7mjm")]
@@ -1265,3 +1279,23 @@ position = Vector2(430, 527)
 
 [node name="Skeleton" parent="Mobs" instance=ExtResource("4_keu8q")]
 position = Vector2(739, 485)
+
+[node name="Skeleton2" parent="Mobs" instance=ExtResource("4_keu8q")]
+position = Vector2(836, 521)
+
+[node name="Skeleton3" parent="Mobs" instance=ExtResource("4_keu8q")]
+position = Vector2(905, 524)
+
+[node name="Skeleton4" parent="Mobs" instance=ExtResource("4_keu8q")]
+position = Vector2(613, 539)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 27.0
+offset_top = 16.0
+offset_right = 96.0
+offset_bottom = 88.0
+theme_override_font_sizes/font_size = 50
+text = "HP"
+script = SubResource("GDScript_7q3eq")
