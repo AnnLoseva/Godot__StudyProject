@@ -1256,7 +1256,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	text = \"HP: \" + str($\"../../Player/Player\".hp)
+	text = \"HP: \" + str($\"../../Player/Player\".hp) + \" + \" + str($\"../../Player/Player\".accept_pressed_time)
 "
 
 [node name="Level" type="Node2D"]
