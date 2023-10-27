@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bd608yivglinw"]
+[gd_scene load_steps=10 format=3 uid="uid://bd608yivglinw"]
 
 [ext_resource type="PackedScene" uid="uid://bhb4s7m7c7i7l" path="res://Player/Player.tscn" id="1_pgey1"]
 [ext_resource type="PackedScene" uid="uid://cdv48eln07iqa" path="res://Art/Parallax_BackGround.tscn" id="2_c7mjm"]
@@ -1256,7 +1256,34 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	text = \"HP: \" + str($\"../../Player/Player\".hp) + \" + \" + str($\"../../Player/Player\".accept_pressed_time)
+	text = \"HP: \" + str($\"../../Player/Player\".hp)
+"
+
+[sub_resource type="GDScript" id="GDScript_i0wy7"]
+script/source = "extends Label
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	text = \"Gold: \" + str($\"../../Player/Player\".gold)
+"
+
+[sub_resource type="GDScript" id="GDScript_qovid"]
+script/source = "extends Timer
+
+var gold = preload(\"res://Collectibles/gold.tscn\")
+
+
+func _on_timeout():
+	var goldTemp = gold.instantiate()
+	var RandInt = randi_range(50, 1100)
+	goldTemp.position = Vector2(RandInt,545)
+	add_child(goldTemp)
 "
 
 [node name="Level" type="Node2D"]
@@ -1291,7 +1318,7 @@ position = Vector2(613, 539)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Label" type="Label" parent="CanvasLayer"]
+[node name="HP" type="Label" parent="CanvasLayer"]
 offset_left = 27.0
 offset_top = 16.0
 offset_right = 96.0
@@ -1299,3 +1326,21 @@ offset_bottom = 88.0
 theme_override_font_sizes/font_size = 50
 text = "HP"
 script = SubResource("GDScript_7q3eq")
+
+[node name="Gold" type="Label" parent="CanvasLayer"]
+offset_left = 30.0
+offset_top = 89.0
+offset_right = 99.0
+offset_bottom = 161.0
+theme_override_font_sizes/font_size = 50
+text = "HP"
+script = SubResource("GDScript_i0wy7")
+
+[node name="Collectibles" type="Node2D" parent="."]
+
+[node name="Timer" type="Timer" parent="Collectibles"]
+wait_time = 3.0
+autostart = true
+script = SubResource("GDScript_qovid")
+
+[connection signal="timeout" from="Collectibles/Timer" to="Collectibles/Timer" method="_on_timeout"]

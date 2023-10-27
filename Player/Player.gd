@@ -9,6 +9,7 @@ var flying_force = 1
 var hp = 100
 var alive = true
 var accept_pressed_time = 0
+var gold = 0
 
 @onready var anim = $AnimatedSprite2D
 
