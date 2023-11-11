@@ -12,6 +12,7 @@ var accept_pressed_time = 0
 var gold = 0
 
 @onready var anim = $AnimatedSprite2D
+@onready var animPlayer = $AnimationPlayer
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -23,7 +24,7 @@ func _physics_process(delta):
 			
 		if not is_on_floor():
 			velocity.y += gravity * delta
-			anim.play("Fall")
+			animPlayer.play("Fall")
 			
 		else:
 			double_jump = false
@@ -35,12 +36,12 @@ func _physics_process(delta):
 		
 		if Input.is_action_just_pressed("jump") and is_on_floor():
 			velocity.y = JUMP_VELOCITY
-			anim.play("Jump")
+			animPlayer.play("Jump")
 			
 		elif Input.is_action_just_pressed("jump") and !double_jump:
 			velocity.y = JUMP_VELOCITY
 			double_jump = true
-			anim.play("Jump")
+			animPlayer.play("Jump")
 			
 		if Input.is_action_just_released("jump"):
 			accept_pressed_time = 0
@@ -59,10 +60,10 @@ func _physics_process(delta):
 			velocity.x = direction * SPEED * flying_force
 			
 			if velocity.y == 0:
-				anim.play("Run") 
+				animPlayer.play("Run") 
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
-			anim.play("Idle")
+			animPlayer.play("Idle")
 			
 		if direction == 1:
 			$AnimatedSprite2D.flip_h = false
@@ -77,7 +78,7 @@ func _physics_process(delta):
 		
 func death():
 	alive = false
-	anim.play("Death")
+	animPlayer.play("Death")
 	await anim.animation_finished
 	queue_free()
 	get_tree().change_scene_to_file("res://Menu/menu.tscn")
