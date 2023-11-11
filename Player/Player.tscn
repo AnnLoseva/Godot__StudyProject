@@ -254,6 +254,11 @@ animations = [{
 "name": &"Attack",
 "speed": 10.0
 }, {
+"frames": [],
+"loop": true,
+"name": &"Block",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_svjfl")
@@ -439,19 +444,15 @@ shape = SubResource("CapsuleShape2D_u5uoj")
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2.5, 2.5)
 process_callback = 0
+limit_left = -5000
+limit_right = 5000
+limit_bottom = 630
 position_smoothing_enabled = true
-position_smoothing_speed = 10.0
-rotation_smoothing_enabled = true
 rotation_smoothing_speed = 10.0
 drag_horizontal_enabled = true
-drag_vertical_enabled = true
-drag_left_margin = 0.1
-drag_top_margin = 0.1
-drag_right_margin = 0.1
-drag_bottom_margin = 0.1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1, -13)
 sprite_frames = SubResource("SpriteFrames_lt48i")
-animation = &"Death"
+animation = &"Block"
 autoplay = "Idle"
